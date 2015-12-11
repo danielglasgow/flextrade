@@ -10,12 +10,11 @@ public class Simulator {
     public static final int SAMPLE_SIZE = 100;
 
     public static void main(String[] args) {
-        run(0);
-
+        run();
     }
 
-    private static void run(double vol) {
-        DaySimulation daySimulation = new DaySimulation(100, 0.5, 0, 0);
+    private static void run() {
+        DaySimulation daySimulation = new DaySimulation(1000, .1, 0, 0);
         List<Double> price = new ArrayList<>();
         List<Double> balance = new ArrayList<>();
         List<Double> maxExposure = new ArrayList<>();
@@ -51,7 +50,7 @@ public class Simulator {
         for (Double number : numbers) {
             variance += Math.pow(avg - number, 2);
         }
-        return Math.sqrt(variance);
+        return Math.sqrt(variance / (numbers.size() - 1));
     }
 
 }

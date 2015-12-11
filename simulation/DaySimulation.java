@@ -59,19 +59,10 @@ public class DaySimulation {
     private double getPriceChangePercentage() {
         double p = Math.random();
         p = p - 0.5;
-        double sampleSizeAdjustor = getSampleSizeAdjustor();
-        p = p * sampleSizeAdjustor;
+        p = p * Math.sqrt(numTransactions);
         p = p * (volatility / Simulator.STDV_CONTINUOUS_VARAIABLE);
         p = p + marketTendency;
         return p / numTransactions;
-    }
-
-    private double getSampleSizeAdjustor() {
-        if (numTransactions < Simulator.SAMPLE_SIZE) {
-            return Math.sqrt(Simulator.SAMPLE_SIZE / numTransactions);
-        } else {
-            return Math.sqrt(numTransactions / Simulator.SAMPLE_SIZE);
-        }
     }
 
     public static class Result {
